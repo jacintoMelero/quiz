@@ -13,24 +13,24 @@ exports.load = function (req , res ,next,quizId){
 };
 exports.index = function (req , res ){
 	models.Quiz.findAll().then(function(quizes){
-		res.render('/quizes/index.ejs',{quizes:quizes});
+		res.render('quizes/index.ejs',{quizes:quizes});
 	});
 };
 exports.show = function (req , res ){
 	console.log('fuera');
 	models.Quiz.find(req.params.quizId).then(function(quiz){
 		console.log('dentro');
-		res.render('/quizes/show',{quiz: quiz});
+		res.render('quizes/show',{quiz: quiz});
 	});
 };
 //get quizes answer
 exports.answer = function (req , res ){
   models.Quiz.find(req.params.quizId).then(function(quiz){
     if(req.query.respuesta === quiz[0].respuesta){
-      res.render('/quizes/answer',{quiz:req.quiz,respuesta:'Correcta'});
+      res.render('quizes/answer',{quiz:req.quiz,respuesta:'Correcta'});
     }
     else{
-      res.render('/quizes/answer',{quiz:req.quiz,respuesta:'Incorrecta'});
+      res.render('quizes/answer',{quiz:req.quiz,respuesta:'Incorrecta'});
     }
   });
 };
