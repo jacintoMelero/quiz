@@ -21,7 +21,8 @@ var sequelize = new Sequelize(DB_name, user, pwd,{
   omitNull:true
 });
 
-var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+var quiz_path = path.join(__dirname,'quiz');
+var Quiz = sequelize.import(quiz_path);
 exports.Quiz=Quiz;
 
 sequelize.sync().success(function (){
