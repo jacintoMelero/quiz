@@ -18,13 +18,13 @@ exports.index = function (req , res ){
 };
 exports.show = function (req , res ){
 	models.Quiz.find(req.params.quizId).then(function(quiz){
-		res.render('quizes/show',{quiz:req.quiz});
+		res.render('quizes/show',{quiz: quiz});
 	});
 };
 //get quizes answer
 exports.answer = function (req , res ){
   models.Quiz.find(req.params.quizId).then(function(quiz){
-    if(req.query.respuesta === req.quiz.respuesta){
+    if(req.query.respuesta === quiz[0].respuesta){
       res.render('quizes/answer',{quiz:req.quiz,respuesta:'Correcta'});
     }
     else{
