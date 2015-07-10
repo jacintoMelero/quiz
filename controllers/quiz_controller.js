@@ -23,7 +23,7 @@ exports.show = function (req , res ){
 };
 //get quizes answer
 exports.answer = function (req , res ){
-  models.Quiz.find(req.params.quizId).success(function(quiz){
+  models.Quiz.find(req.params.quizId).then(function(quiz){
     if(req.query.respuesta === req.quiz.respuesta){
       res.render('quizes/answer',{quiz:req.quiz,respuesta:'Correcta'});
     }
