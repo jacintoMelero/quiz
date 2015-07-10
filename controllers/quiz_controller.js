@@ -18,7 +18,7 @@ exports.index = function (req , res ){
 };
 exports.show = function (req , res ){
 	console.log('fuera');
-	models.Quiz.find(req.params.quizId).then(function(quiz){
+	models.Quiz.findById(req.params.quizId).then(function(quiz){
 		console.log('dentro');
 		res.render('quizes/show',{quiz: quiz});
 	});
