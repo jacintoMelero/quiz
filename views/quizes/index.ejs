@@ -1,5 +1,14 @@
+<form method="GET" action="/quizes">
+Buscar pregunta:
+		<input type="text" name="search" value="Buscar..."/>
+		<input type="submit" value="Enviar"/>
+</form>
+
 <table>
-	<% var i; for (i=0;i<quizes.length;i++){%>
+	<% if(quizes.length!=0){ var i; for (i=0;i<quizes.length;i++){%>
 		<tr><td><a href="quizes/<%=quizes[i].id %>"><%=quizes[i].pregunta %></a></td></tr>
-	<% } %>
+	<% }}
+ else{%>
+	<h4>No se han encontrado preguntas con esa busqueda.</h4>
+<%} %>
 </table>
