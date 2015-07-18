@@ -17,6 +17,13 @@
 		Comentarios:
 	</strong>
 	<% for(index in quiz.comments){ %>
-		<p>- <%= quiz.comments[index].texto %> </p>
+		<% if(session.user || quiz.comments[index].publicado){ %>
+			<p>- <%= quiz.comments[index].texto %> </p>
+			<% if(session.user && !quiz.comments[index].publicado){ %>
+					<a href="/quizes/<%= quiz.id %>/comments/<%= quiz.comments[index].id%>/publish">
+						<button>Publicar</button>
+					</a>
+			<% } %>
+		<% } %>
 	<% } %>
 </p>
