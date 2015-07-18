@@ -2,10 +2,14 @@ var models=require('../models/models.js');
 //get quizes question
 
 exports.load = function(req, res, next, quizId) {
-  models.Quiz.find(quizId).then(
+  models.Quiz.find({
+    where: {id: Number(quizId)},
+    include: [{model: models.Comment}]
+  }).then(
     function(quiz) {
       if (quiz) {
         req.quiz = quiz;
+        console.log(quiz.Comments);
         next();
       } else { next(new Error('No existe quizId=' + quizId)); }
     }
