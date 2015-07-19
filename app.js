@@ -35,7 +35,7 @@ app.use(function (req,res,next){
     if(req.session.lastRequest!=undefined){
       //console.log("ultima peticion"+req.session.lastRequest);
       var newRequest=new Date().getTime();
-      if((newRequest-req.session.lastRequest)>=15000){
+      if((newRequest-req.session.lastRequest)>=120000){
         delete req.session.user;
         res.redirect(req.session.redir.toString());
       }
