@@ -30,9 +30,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(function (req,res,next){
+  if(req.session.user!=undefined){
+    //console.log("ha iniciado sesion-"+req.session.user.username);
+    if(req.session.lastRequest!=undefined){
+      //console.log("ultima peticion"+req.session.lastRequest);
+      var newRequest=new Date().getTime();
+      if((newRequest-req.session.lastRequest)>=15000){
+        delete req.session.user;
+        res.redirect(req.session.redir.toString());
+      }
+    }
+    else{
+      req.session.lastRequest=new Date().getTime();
+      //console.log("no tiene lastRequest"+req.session.lastRequest);
+    }
+  }
+  //console.log("tiempo-"+ new Date().getTime());
   if(!req.path.match(/\/login|\/logout/)){
+    //console.log("tiempo2-"+ new Date().getTime());
     req.session.redir= req.path;
   }
+  //console.log("tiempo3-"+ new Date().getTime());
   res.locals.session=req.session;
   next();
 })
